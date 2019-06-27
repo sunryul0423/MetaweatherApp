@@ -1,0 +1,49 @@
+# MetaweatherApp
+MetaWeather의 Open_API를 활용한 날씨검색 App
+-
+
+### [1] Build 환경 및 개발 **( MVVM 패턴 )**
+* 안드로이드 스튜디오 3.4.1 
+* Gradle 5.1.1
+* Kotlin 1.3.40
+* JDK 1.8
+* target, compileSdkVersion 28
+* minSdkVersion 21
+
+### [2] 사용라이브러리
+* DataBinding
+* AAC
+* RectiveX
+* Koin
+* presco
+* Retrofit2
+<pre>
+<code>   
+    // android_X
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01'
+
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+
+    // Koin
+    implementation 'org.koin:koin-android:1.0.2'
+    implementation 'org.koin:koin-androidx-scope:1.0.2'
+
+    // Presco
+    implementation 'com.facebook.fresco:fresco:1.13.0'
+    implementation "com.facebook.fresco:imagepipeline-okhttp3:1.13.0"
+
+    // Http
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+</code>
+</pre>
