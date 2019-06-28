@@ -1,52 +1,53 @@
 package com.metaweather
 
 import android.app.Application
-import com.facebook.cache.disk.DiskCacheConfig
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory
-import com.facebook.imagepipeline.cache.MemoryCacheParams
-import com.facebook.imagepipeline.core.ImagePipelineConfig
+import android.content.Context
+import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.Registry
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
+import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
+import com.bumptech.glide.load.engine.cache.LruResourceCache
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.module.AppGlideModule
 import com.metaweather.di.appModule
-import okhttp3.OkHttpClient
-import org.koin.android.ext.android.inject
+import com.metaweather.utils.DISK_CACHE_NAME
 import org.koin.android.ext.android.startKoin
+import java.io.InputStream
+
 
 /**
  * 기본 설정 Application
  */
 class MetaweatherApplication : Application() {
 
-    private val okHttpClient: OkHttpClient by inject()
-
     override fun onCreate() {
         super.onCreate()
         startKoin(this, appModule)
-
-        val maxMemoryCacheSize = Runtime.getRuntime().maxMemory().toInt() / 4
-        val config: ImagePipelineConfig = OkHttpImagePipelineConfigFactory
-            .newBuilder(this, okHttpClient)
-            .setBitmapMemoryCacheParamsSupplier {
-                MemoryCacheParams(
-                    maxMemoryCacheSize,
-                    Int.MAX_VALUE,
-                    maxMemoryCacheSize,
-                    Int.MAX_VALUE,
-                    Int.MAX_VALUE
-                )
-            }
-            .setMainDiskCacheConfig(
-                DiskCacheConfig.newBuilder(this)
-                    .setBaseDirectoryPath(cacheDir)
-                    .setBaseDirectoryName(getString(R.string.disk_cache_dir_name))
-                    .build()
-            )
-            .setDownsampleEnabled(true)
-            .build()
-        Fresco.initialize(this, config)
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        Fresco.getImagePipeline().clearMemoryCaches()
+        GlideApp.get(this).clearMemory()
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        GlideApp.get(this).trimMemory(level)
+    }
+}
+
+@GlideModule
+class MyAppGlideModule : AppGlideModule() {
+    override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
+        registry.replace(GlideUrl::class.java, InputStream::class.java, OkHttpUrlLoader.Factory())
+    }
+
+    override fun applyOptions(context: Context, builder: GlideBuilder) {
+        val memoryCacheSizeBytes = 1024 * 1024 * 20L // 20MB
+        val diskCacheSizeBytes = 1024 * 1024 * 100L  //100MB
+        builder.setMemoryCache(LruResourceCache(memoryCacheSizeBytes))
+        builder.setDiskCache(InternalCacheDiskCacheFactory(context, DISK_CACHE_NAME, diskCacheSizeBytes))
     }
 }

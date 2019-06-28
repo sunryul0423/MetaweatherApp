@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable
  * @since 2019.02.20
  * @property compositeDisposable Rx 구독 객체
  * @property networkError 네트워크 에러 메세지
- * @property isProgress 프로그래스 실행여부
+ * @property showProgress 프로그래스 실행여부
  * @property addDisposable RxJava2를 이용한 메모리 할당
  * @property onCleared RxJava2를 이용한 메모리 해제
  */
@@ -22,9 +22,9 @@ abstract class BaseViewModel : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     protected val errorMsg = MutableLiveData<String>()
-    protected val progress = MutableLiveData<Boolean>().apply { value = false }
+    protected val _showProgress = MutableLiveData<Boolean>().apply { value = false }
     val networkError: LiveData<String> get() = errorMsg
-    val isProgress: LiveData<Boolean> get() = progress
+    val showProgress: LiveData<Boolean> get() = _showProgress
 
     /**```
      * 비동기 작업인 Rx와 API 통신은 CompositeDisposable로 관리

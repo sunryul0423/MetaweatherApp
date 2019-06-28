@@ -1,5 +1,12 @@
 package com.metaweather.di
 
+import android.content.Context
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Registry
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.module.LibraryGlideModule
 import com.metaweather.interfaces.ApiRequest
 import com.metaweather.model.view.MainViewModelFactory
 import com.metaweather.utils.BASE_URL
@@ -10,6 +17,7 @@ import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
 /**

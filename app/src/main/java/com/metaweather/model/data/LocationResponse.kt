@@ -4,11 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 /**
  * 지역날씨 검색 API Response
- * @param response 결과 리스트
+ * @param weatherList 결과 리스트
  */
 data class LocationResponse(
     @SerializedName("consolidated_weather")
-    val weatherList: List<ConsolidatedWeather>
+    val weatherList: List<ConsolidatedWeather>,
+    val title: String
 ) {
 
     /**

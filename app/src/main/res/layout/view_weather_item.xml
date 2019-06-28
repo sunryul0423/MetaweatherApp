@@ -10,13 +10,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/recycler_view_under_background">
 
         <TextView
                 android:id="@+id/tvLocal"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/recycler_view_lr_background"
                 android:gravity="center"
+                android:textSize="@dimen/item_local_text_size"
                 android:text="@{weatherItemVM.localTitle}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -24,61 +27,63 @@
                 app:layout_constraintEnd_toStartOf="@+id/llToday"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintHorizontal_weight="1"
-                tools:ignore="MissingConstraints"
                 tools:text="Seoul"/>
 
         <LinearLayout
                 android:id="@+id/llToday"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/item_padding"
+                android:paddingBottom="@dimen/item_padding"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvLocal"
                 app:layout_constraintEnd_toStartOf="@+id/llTomorrow"
                 app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintHorizontal_weight="4"
-                tools:ignore="MissingConstraints">
+                app:layout_constraintHorizontal_weight="3.8">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                     android:id="@+id/ivTodayImg"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/item_weather_img_size"
                     android:layout_height="wrap_content"
-                    android:minWidth="100dp"
+                    android:padding="@dimen/item_weather_img_padding"
                     android:layout_gravity="center"
-                    app:placeholderImage="@drawable/sim"
-                    app:failureImage="@drawable/error_placeholder"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
                     app:imgUrl="@{weatherItemVM.todayImageUrl}"
-                    app:layout_constraintDimensionRatio="1"
-                    tools:ignore="MissingConstraints"/>
+                    tools:ignore="RtlSymmetry"/>
 
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/item_weather_img_padding"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    tools:ignore="MissingConstraints">
+                    android:orientation="vertical">
 
                 <TextView
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/item_weather_text_size"
                         android:text="@{weatherItemVM.todayWaterName}"
                         tools:text="Light Cloud"/>
 
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_marginTop="10dp">
+                              android:layout_marginTop="7dp">
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:textColor="@color/colorPrimaryDark"
+                              android:textSize="@dimen/item_humidity_text_size"
                               android:text="@{weatherItemVM.todayTemp}"
                               tools:text="-7℃"/>
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:layout_marginStart="7dp"
+                              android:layout_marginStart="5dp"
                               android:textColor="@color/black"
+                              android:textSize="@dimen/item_humidity_text_size"
                               android:text="@{weatherItemVM.todayHumidity}"
                               tools:text="24%"/>
                 </LinearLayout>
@@ -88,54 +93,59 @@
         <LinearLayout
                 android:id="@+id/llTomorrow"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/recycler_view_lr_background"
+                android:paddingTop="@dimen/item_padding"
+                android:paddingBottom="@dimen/item_padding"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/llToday"
                 app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintHorizontal_weight="4"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="MissingConstraints">
+                app:layout_constraintHorizontal_weight="3.8"
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                     android:id="@+id/ivTomorrowImg"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/item_weather_img_size"
                     android:layout_height="wrap_content"
-                    android:minWidth="100dp"
+                    android:paddingEnd="@dimen/item_weather_img_padding"
+                    android:padding="@dimen/item_weather_img_padding"
                     android:layout_gravity="center"
-                    app:placeholderImage="@drawable/error_placeholder"
-                    app:failureImage="@drawable/error_placeholder"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@null"
                     app:imgUrl="@{weatherItemVM.tomorrowImageUrl}"
-                    tools:ignore="MissingConstraints"/>
+                    tools:ignore="RtlSymmetry"/>
 
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    tools:ignore="MissingConstraints">
+                    android:orientation="vertical">
 
                 <TextView
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/item_weather_text_size"
                         android:text="@{weatherItemVM.tomorrowWaterName}"
                         tools:text="Light Cloud"/>
 
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:layout_marginTop="10dp">
+                              android:layout_marginTop="7dp">
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:textColor="@color/colorPrimaryDark"
+                              android:textSize="@dimen/item_humidity_text_size"
                               android:text="@{weatherItemVM.tomorrowTemp}"
                               tools:text="-7℃"/>
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:layout_marginStart="7dp"
+                              android:layout_marginStart="5dp"
                               android:textColor="@color/black"
+                              android:textSize="@dimen/item_humidity_text_size"
                               android:text="@{weatherItemVM.tomorrowHumidity}"
                               tools:text="24%"/>
                 </LinearLayout>

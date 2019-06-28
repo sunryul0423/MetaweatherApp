@@ -17,7 +17,7 @@ MetaWeather의 Open_API를 활용한 날씨검색 App
 * AAC
 * RectiveX
 * Koin
-* presco
+* Glide 4
 * Retrofit2
 <pre>
 <code>   
@@ -37,9 +37,10 @@ MetaWeather의 Open_API를 활용한 날씨검색 App
     implementation 'org.koin:koin-android:1.0.2'
     implementation 'org.koin:koin-androidx-scope:1.0.2'
 
-    // Presco
-    implementation 'com.facebook.fresco:fresco:1.13.0'
-    implementation "com.facebook.fresco:imagepipeline-okhttp3:1.13.0"
+    // Glide
+    implementation "com.github.bumptech.glide:glide:4.9.0"
+    kapt "com.github.bumptech.glide:compiler:4.9.0"
+    implementation "com.github.bumptech.glide:okhttp3-integration:4.9.0"
 
     // Http
     implementation 'com.google.code.gson:gson:2.8.5'

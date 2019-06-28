@@ -31,7 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mainViewModel.networkError.observe(this, Observer {
             networkErrorToast()
         })
-        mainViewModel.isProgress.observe(this, Observer {
+        mainViewModel.showProgress.observe(this, Observer {
             if (it) {
                 progressDialog.show()
             } else {

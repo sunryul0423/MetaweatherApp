@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools="http://schemas.android.com/tools" >
 
     <data>
         <import type="android.view.View"/>
@@ -11,30 +12,40 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/spacing_15dp"
-            android:layout_marginEnd="@dimen/spacing_15dp"
-            android:layout_marginBottom="@dimen/spacing_15dp">
+            android:padding="@dimen/main_padding">
 
         <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_title"
-                android:textSize="30sp"
+                android:textSize="@dimen/main_text_size"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_marginTop="@dimen/spacing_30dp"
+                android:layout_marginTop="@dimen/main_title_margin"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_15dp"
-                android:scrollbars="none"
-                app:searchWeatherAdapter="@{mainViewModel.searchWeatherAdapter}"
-                app:weatherDataList="@{mainViewModel.weatherDataList}"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/main_title_margin"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:onRefreshListener="@{() -> mainViewModel.reqLocationSearch(false)}"
+                app:refreshing="@{safeUnbox(mainViewModel.isRefresh)}"
+                tools:ignore="MissingConstraints">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"
+                    app:weatherInfoAdapter="@{mainViewModel.weatherInfoAdapter}"
+                    app:weatherDataList="@{mainViewModel.weatherDataList}"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

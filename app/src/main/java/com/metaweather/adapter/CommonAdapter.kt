@@ -1,51 +1,62 @@
 package com.metaweather.adapter
 
-import android.graphics.drawable.Animatable
-import android.net.Uri
-import android.util.DisplayMetrics
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.util.Log
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.controller.BaseControllerListener
-import com.facebook.drawee.view.SimpleDraweeView
-import com.facebook.imagepipeline.common.RotationOptions
-import com.facebook.imagepipeline.image.ImageInfo
-import com.facebook.imagepipeline.request.ImageRequestBuilder
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.metaweather.GlideApp
 
 
 /**
- * Presco 이미지 세팅
+ * Glide 이미지 세팅
  * @param view xml의 SimpleDraweeView
  * @param url 이미지 Url
  */
 @BindingAdapter("imgUrl")
-fun setImageUrl(view: SimpleDraweeView, url: String?) {
+fun setImageUrl(view: ImageView, url: String?) {
     url?.let {
-        val request = ImageRequestBuilder
-            .newBuilderWithSource(Uri.parse(url))
-            .setRotationOptions(RotationOptions.autoRotate()) // 화면 회전시 맞춤
-            .setProgressiveRenderingEnabled(true) //개선된 JPEG이미지 스트리밍을 지원
-            .build()
+        GlideApp.with(view.context.applicationContext)
+            .load(url)
+            .fitCenter()
+            .listener(createLoggerListener("wrap_image"))
+            .into(view)
+    }
+}
 
-        // controller 생성 및 setting
-        val draweeController = Fresco.newDraweeControllerBuilder().run {
-            this.oldController = view.controller
-            controllerListener = object : BaseControllerListener<ImageInfo>() {
-                override fun onFinalImageSet(id: String?, imageInfo: ImageInfo?, animatable: Animatable?) {
-                    super.onFinalImageSet(id, imageInfo, animatable)
-                    imageInfo?.let {
-                        view.layoutParams.width =
-                            (imageInfo.width / (view.context.resources.displayMetrics.density)).toInt()
-                        view.layoutParams.height =
-                            (imageInfo.height / (view.context.resources.displayMetrics.density)).toInt()
-//                        view.aspectRatio = imageInfo.width.toFloat() / imageInfo.height
-                    }
-                }
-            }
-            this.imageRequest = request
-            this.build()
+fun createLoggerListener(name: String): RequestListener<Drawable> {
+    return object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: com.bumptech.glide.request.target.Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            return false
         }
-        view.controller = draweeController
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: com.bumptech.glide.request.target.Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            if (resource is BitmapDrawable) {
+                val bitmap = resource.bitmap
+                Log.d(
+                    "srpark", String.format(
+                        "Ready %s bitmap %,d bytes, size: %d x %d", name,
+                        bitmap.byteCount,
+                        bitmap.width,
+                        bitmap.height
+                    )
+                )
+            }
+            return false
+        }
     }
 }

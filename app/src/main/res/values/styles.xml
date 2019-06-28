@@ -8,8 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="TextViewStyle" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">16sp</item>
+    <style name="HeaderTextViewStyle" parent="@android:style/Widget.TextView">
+        <item name="android:paddingTop">@dimen/item_header_padding</item>
+        <item name="android:paddingBottom">@dimen/item_header_padding</item>
+        <item name="android:textSize">@dimen/item_local_text_size</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/black</item>
     </style>
