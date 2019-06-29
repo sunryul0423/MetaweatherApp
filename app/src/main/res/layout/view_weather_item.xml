@@ -68,9 +68,9 @@
                         android:text="@{weatherItemVM.todayWaterName}"
                         tools:text="Light Cloud"/>
 
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:layout_marginTop="7dp">
+                              android:layout_marginTop="@dimen/item_weather_text_margin">
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
@@ -81,11 +81,12 @@
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:layout_marginStart="5dp"
+                              android:layout_marginStart="@dimen/item_weather_text_margin"
                               android:textColor="@color/black"
                               android:textSize="@dimen/item_humidity_text_size"
                               android:text="@{weatherItemVM.todayHumidity}"
                               tools:text="24%"/>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -130,9 +131,9 @@
                         android:text="@{weatherItemVM.tomorrowWaterName}"
                         tools:text="Light Cloud"/>
 
-                <LinearLayout android:layout_width="match_parent"
+                <LinearLayout android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:layout_marginTop="7dp">
+                              android:layout_marginTop="@dimen/item_weather_text_margin">
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
@@ -143,11 +144,12 @@
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:layout_marginStart="5dp"
+                              android:layout_marginStart="@dimen/item_weather_text_margin"
                               android:textColor="@color/black"
                               android:textSize="@dimen/item_humidity_text_size"
                               android:text="@{weatherItemVM.tomorrowHumidity}"
                               tools:text="24%"/>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

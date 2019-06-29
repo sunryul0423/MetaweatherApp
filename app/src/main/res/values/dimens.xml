@@ -10,6 +10,7 @@
     <dimen name="item_weather_img_padding">8dp</dimen>
     <dimen name="item_local_padding">2dp</dimen>
     <dimen name="item_weather_img_size">65dp</dimen>
+    <dimen name="item_weather_text_margin">7dp</dimen>
 
     <!-- Text Size -->
     <dimen name="main_text_size">30sp</dimen>

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.metaweather.R
-import com.metaweather.dialog.ProgressDialog
 
 /**
  * AppCompatActivity를 Base로 공통적으로 필요한 변수,함수 정의
@@ -15,18 +14,15 @@ import com.metaweather.dialog.ProgressDialog
  * @since 2019.02.20
  * @property viewBinding Binding ContentView
  * @property layoutResourceId ContentView ID
- * @property progressDialog 프로그래스 다이얼로그(로딩)
  */
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     protected lateinit var viewBinding: T
     protected abstract val layoutResourceId: Int
-    protected lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = DataBindingUtil.setContentView(this, layoutResourceId)
-        progressDialog = ProgressDialog(this)
     }
 
     /**

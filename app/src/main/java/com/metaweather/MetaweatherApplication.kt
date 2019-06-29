@@ -13,7 +13,10 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.metaweather.di.appModule
 import com.metaweather.utils.DISK_CACHE_NAME
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import java.io.InputStream
 
 
@@ -24,7 +27,11 @@ class MetaweatherApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, appModule)
+        startKoin {
+            androidLogger()
+            androidContext(this@MetaweatherApplication)
+            modules(appModule)
+        }
     }
 
     override fun onLowMemory() {

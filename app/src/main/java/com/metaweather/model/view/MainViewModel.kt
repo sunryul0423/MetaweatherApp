@@ -2,7 +2,6 @@ package com.metaweather.model.view
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.metaweather.adapter.WeatherInfoAdapter
 import com.metaweather.interfaces.ApiRequest
 import com.metaweather.model.data.LocationResponse
 import com.metaweather.model.data.WeatherData
@@ -20,7 +19,6 @@ import kotlin.math.roundToInt
  * @author SR.Park
  * @param apiRequest API Interface
  * @property weatherDataList 날씨 정보 리스트
- * @property weatherInfoAdapter recyclerView Adapter
  */
 class MainViewModel(private val apiRequest: ApiRequest) : BaseViewModel() {
     private val _isRefresh = MutableLiveData<Boolean>()
@@ -28,7 +26,6 @@ class MainViewModel(private val apiRequest: ApiRequest) : BaseViewModel() {
 
     val isRefresh: LiveData<Boolean> get() = _isRefresh
     val weatherDataList: LiveData<MutableList<WeatherData>> get() = _weatherDataList
-    val weatherInfoAdapter = WeatherInfoAdapter()
 
     init {
         reqLocationSearch(true)
@@ -36,12 +33,13 @@ class MainViewModel(private val apiRequest: ApiRequest) : BaseViewModel() {
 
     /**
      * 지역검색 API 호출
+     * @param showProgress progress 사용여부 (true:Progress View, false:SwipeRefreshLayout)
      */
     fun reqLocationSearch(showProgress: Boolean) {
         if (showProgress) {
             _showProgress.value = true
         } else {
-            _weatherDataList.value = mutableListOf()
+            _weatherDataList.value = null // Refresh 중 RecyclerView 초기화
         }
         addDisposable(
             apiRequest.getLocationSearch(SEARCH_TEXT)

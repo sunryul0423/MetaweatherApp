@@ -7,6 +7,7 @@ import com.metaweather.R
 import com.metaweather.databinding.ActivityMainBinding
 import com.metaweather.model.view.MainViewModel
 import com.metaweather.model.view.MainViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 /**
@@ -33,9 +34,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         })
         mainViewModel.showProgress.observe(this, Observer {
             if (it) {
-                progressDialog.show()
+                progressBar.show()
             } else {
-                progressDialog.cancel()
+                progressBar.hide()
             }
         })
         viewBinding.mainViewModel = mainViewModel

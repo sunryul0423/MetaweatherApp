@@ -16,54 +16,38 @@ import com.metaweather.model.view.WeatherItemVM
 import com.metaweather.utils.TYPE_HEADER_COUNT
 
 /**
- * 날씨 검색 RecyclerView Adapter 설정
- * @see R.layout.activity_main
- * @param view recyclerView
- * @param weatherInfoAdapter 날씨 검색 RecyclerView Adapter
- */
-@BindingAdapter("weatherInfoAdapter")
-fun setWeatherInfoAdapter(view: RecyclerView, weatherInfoAdapter: WeatherInfoAdapter?) {
-    weatherInfoAdapter?.let {
-        with(view) {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = it
-//            ContextCompat.getDrawable(context, R.drawable.divider_drawable)?.let { drawable ->
-//                val dividerItemDecoration =
-//                    DividerItemDecoration(context, LinearLayoutManager(context).orientation).apply {
-//                        setDrawable(drawable)
-//                    }
-//                addItemDecoration(dividerItemDecoration)
-//            }
-        }
-    }
-}
-
-/**
- *  날씨 검색 RecyclerView Adapter Item 설정
+ *  날씨정보 RecyclerView Adapter Item 설정
  * @see R.layout.activity_main
  * @param view recyclerView
  * @param weatherDataList 날씨정보 리스트
  */
 @BindingAdapter("weatherDataList")
 fun setWeatherData(view: RecyclerView, weatherDataList: List<WeatherData>?) {
-    weatherDataList?.let {
-        val weatherItemVMList: MutableList<WeatherItemVM> = mutableListOf()
-        it.map { weatherData ->
-            with(WeatherItemVM()) {
-                setLocalTitle(weatherData.localTitle)
-                setTodayWatherName(weatherData.todayWaterName)
-                setTodayTemp(weatherData.todayTemp)
-                setTodayHumidity(weatherData.todayHumidity)
-                setTodayImageUrl(weatherData.todayImageUrl)
-                setTomorrowWatherName(weatherData.tomorrowWaterName)
-                setTomorrowTemp(weatherData.tomorrowTemp)
-                setTomorrowHumidity(weatherData.tomorrowHumidity)
-                setTomorrowImageUrl(weatherData.tomorrowImageUrl)
-                weatherItemVMList.add(this)
-            }
+    val weatherItemVMList: MutableList<WeatherItemVM> = mutableListOf()
+    weatherDataList?.map { weatherData ->
+        with(WeatherItemVM()) {
+            setLocalTitle(weatherData.localTitle)
+            setTodayWatherName(weatherData.todayWaterName)
+            setTodayTemp(weatherData.todayTemp)
+            setTodayHumidity(weatherData.todayHumidity)
+            setTodayImageUrl(weatherData.todayImageUrl)
+            setTomorrowWatherName(weatherData.tomorrowWaterName)
+            setTomorrowTemp(weatherData.tomorrowTemp)
+            setTomorrowHumidity(weatherData.tomorrowHumidity)
+            setTomorrowImageUrl(weatherData.tomorrowImageUrl)
+            weatherItemVMList.add(this)
         }
-        (view.adapter as WeatherInfoAdapter).addItem(weatherItemVMList)
+    }
+    with(view) {
+        if (adapter == null) {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = WeatherInfoAdapter().apply {
+                addItem(weatherItemVMList)
+            }
+        } else {
+            (adapter as WeatherInfoAdapter).addItem(weatherItemVMList)
+        }
     }
 }
 
@@ -123,7 +107,11 @@ class WeatherInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return weatherItemVM.size + TYPE_HEADER_COUNT
+        return if (weatherItemVM.isEmpty()) {
+            0
+        } else {
+            weatherItemVM.size + TYPE_HEADER_COUNT
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
