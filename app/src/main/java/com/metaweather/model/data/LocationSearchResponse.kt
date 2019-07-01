@@ -1,7 +1,11 @@
 package com.metaweather.model.data
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * 지역날씨 검색 API Response
- * @param woeid Where On Earth ID
+ * @param woeId Where On Earth ID
  */
-data class LocationSearchResponse(val woeid: Int)
+data class LocationSearchResponse(
+    @SerializedName("woeid")
+    val woeId: Int)

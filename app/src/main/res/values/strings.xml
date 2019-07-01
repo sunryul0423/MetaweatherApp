@@ -2,7 +2,6 @@
     <string name="app_name">날씨정보</string>
     <string name="main_title">Local Weather</string>
     <string name="network_error_msg">네트워크 오류가 발생하였습니다.\n사용 중인 데이터 통신 환경을 확인해주세요.</string>
-    <string name="data_empty_msg">검색 결과가 존재하지 않습니다.</string>
     <string name="local">Local</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>

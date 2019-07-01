@@ -16,20 +16,19 @@ import com.metaweather.utils.DISK_CACHE_NAME
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.core.context.stopKoin
 import java.io.InputStream
 
 
 /**
  * 기본 설정 Application
  */
-class MetaweatherApplication : Application() {
+class MetaWeatherApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidLogger()
-            androidContext(this@MetaweatherApplication)
+            androidContext(this@MetaWeatherApplication)
             modules(appModule)
         }
     }
@@ -52,9 +51,9 @@ class MyAppGlideModule : AppGlideModule() {
     }
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val memoryCacheSizeBytes = 1024 * 1024 * 20L // 20MB
-        val diskCacheSizeBytes = 1024 * 1024 * 100L  //100MB
-        builder.setMemoryCache(LruResourceCache(memoryCacheSizeBytes))
+        val memoryCacheSize = (Runtime.getRuntime().maxMemory() / 1024) / 8
+        val diskCacheSizeBytes = 1024 * 1024 * 10L  //10MB
+        builder.setMemoryCache(LruResourceCache(memoryCacheSize))
         builder.setDiskCache(InternalCacheDiskCacheFactory(context, DISK_CACHE_NAME, diskCacheSizeBytes))
     }
 }

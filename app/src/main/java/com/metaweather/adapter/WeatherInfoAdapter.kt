@@ -27,11 +27,11 @@ fun setWeatherData(view: RecyclerView, weatherDataList: List<WeatherData>?) {
     weatherDataList?.map { weatherData ->
         with(WeatherItemVM()) {
             setLocalTitle(weatherData.localTitle)
-            setTodayWatherName(weatherData.todayWaterName)
+            setTodayWeatherName(weatherData.todayWaterName)
             setTodayTemp(weatherData.todayTemp)
             setTodayHumidity(weatherData.todayHumidity)
             setTodayImageUrl(weatherData.todayImageUrl)
-            setTomorrowWatherName(weatherData.tomorrowWaterName)
+            setTomorrowWeatherName(weatherData.tomorrowWaterName)
             setTomorrowTemp(weatherData.tomorrowTemp)
             setTomorrowHumidity(weatherData.tomorrowHumidity)
             setTomorrowImageUrl(weatherData.tomorrowImageUrl)
@@ -52,24 +52,20 @@ fun setWeatherData(view: RecyclerView, weatherDataList: List<WeatherData>?) {
 }
 
 /**
- **
- * 날씨정보 ViewHolder
- * lifecycle에 맞게 사용하기 위해 ViewModelProviders로 Factory 생성
+ * Header ViewHolder
  */
 class LocationHeaderHolder(val binding: ViewHeaderWeatherItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 /**
  * 날씨정보 ViewHolder
- * lifecycle에 맞게 사용하기 위해 ViewModelProviders로 Factory 생성
  */
 class LocationHolder(val binding: ViewWeatherItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 /**
  * 날씨정보 RecyclerView Adapter
  * @author SR.Park
- * @constructor Kakao Image Api
- * @since 2019.02.21
- * @property weatherItemVM 아이템  RecyclerView의 Item 리스트
+ * @since 2019.02.26
+ * @property weatherItemVM 아이템  RecyclerView Item 리스트
  */
 class WeatherInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -77,7 +73,7 @@ class WeatherInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      * Item 리스트 Setting
-     * @param _weatherItemVM Setting할 Item 리스트
+     * @param _weatherItemVM Item 리스트
      */
     fun addItem(_weatherItemVM: List<WeatherItemVM>) {
         if (weatherItemVM.isNotEmpty()) {

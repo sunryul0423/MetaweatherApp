@@ -19,7 +19,7 @@ class KoinTest : KoinTest {
     @Before
     fun before() {
         startKoin {
-            androidContext(mock(MetaweatherApplication::class.java))
+            androidContext(mock(MetaWeatherApplication::class.java))
             modules(appModule)
         }
     }

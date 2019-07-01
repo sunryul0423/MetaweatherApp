@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.metaweather.R
+import java.io.IOException
 
 /**
- * AppCompatActivity를 Base로 공통적으로 필요한 변수,함수 정의
+ * 공통적으로 필요한 변수,함수 정의
  * @author SR.Park
- * @constructor Kakao Image Api
- * @since 2019.02.20
+ * @since 2019.06.26
  * @property viewBinding Binding ContentView
  * @property layoutResourceId ContentView ID
  */
@@ -28,7 +28,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     /**
      * 네트워크 에러발생 Toast 메세지
      */
-    protected fun networkErrorToast() {
-        Toast.makeText(this, getString(R.string.network_error_msg), Toast.LENGTH_LONG).show()
+    protected fun networkErrorToast(throwable: Throwable) {
+        when (throwable) {
+            is IOException -> Toast.makeText(this, getString(R.string.network_error_msg), Toast.LENGTH_LONG).show()
+            else -> Toast.makeText(this, throwable.message, Toast.LENGTH_LONG).show()
+        }
     }
 }

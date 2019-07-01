@@ -5,21 +5,21 @@ import androidx.lifecycle.MutableLiveData
 
 class WeatherItemVM : BaseViewModel() {
     private val _localTitle = MutableLiveData<String>()
-    private val _todayWaterName = MutableLiveData<String>()
+    private val _todayWeatherName = MutableLiveData<String>()
     private val _todayTemp = MutableLiveData<String>()
     private val _todayHumidity = MutableLiveData<String>()
     private val _todayImageUrl = MutableLiveData<String>()
-    private val _tomorrowWaterName = MutableLiveData<String>()
+    private val _tomorrowWeatherName = MutableLiveData<String>()
     private val _tomorrowTemp = MutableLiveData<String>()
     private val _tomorrowHumidity = MutableLiveData<String>()
     private val _tomorrowImageUrl = MutableLiveData<String>()
 
     val localTitle: LiveData<String> get() = _localTitle
-    val todayWaterName: LiveData<String> get() = _todayWaterName
+    val todayWeatherName: LiveData<String> get() = _todayWeatherName
     val todayTemp: LiveData<String> get() = _todayTemp
     val todayHumidity: LiveData<String> get() = _todayHumidity
     val todayImageUrl: LiveData<String> get() = _todayImageUrl
-    val tomorrowWaterName: LiveData<String> get() = _tomorrowWaterName
+    val tomorrowWeatherName: LiveData<String> get() = _tomorrowWeatherName
     val tomorrowTemp: LiveData<String> get() = _tomorrowTemp
     val tomorrowHumidity: LiveData<String> get() = _tomorrowHumidity
     val tomorrowImageUrl: LiveData<String> get() = _tomorrowImageUrl
@@ -28,8 +28,8 @@ class WeatherItemVM : BaseViewModel() {
         _localTitle.value = localTitle
     }
 
-    fun setTodayWatherName(todayWatherName: String) {
-        _todayWaterName.value = todayWatherName
+    fun setTodayWeatherName(todayWeatherName: String) {
+        _todayWeatherName.value = todayWeatherName
     }
 
     fun setTodayTemp(todayTemp: String) {
@@ -44,8 +44,8 @@ class WeatherItemVM : BaseViewModel() {
         _todayImageUrl.value = todayImageUrl
     }
 
-    fun setTomorrowWatherName(tomorrowWatherName: String) {
-        _tomorrowWaterName.value = tomorrowWatherName
+    fun setTomorrowWeatherName(tomorrowWeatherName: String) {
+        _tomorrowWeatherName.value = tomorrowWeatherName
     }
 
     fun setTomorrowTemp(tomorrowTemp: String) {

@@ -5,10 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.metaweather.interfaces.ApiRequest
 
 /**
- * MainViewModel Fractory 객체
+ * MainViewModel Factory 객체
  * @author SR.Park
- * @constructor Kakao Image Api
- * @since 2019.02.20
+ * @since 2019.02.26
  * @param apiRequest API 인터페이스
  */
 @Suppress("UNCHECKED_CAST")

@@ -37,13 +37,13 @@
                 tools:ignore="MissingConstraints"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swRefresh"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/main_title_margin"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:onRefreshListener="@{() -> mainViewModel.reqLocationSearch(false)}"
-                app:refreshing="@{safeUnbox(mainViewModel.isRefresh)}"
+                app:refreshing="@{safeUnbox(mainViewModel.refreshing)}"
                 tools:ignore="MissingConstraints">
 
             <androidx.recyclerview.widget.RecyclerView
