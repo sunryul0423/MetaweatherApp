@@ -35,6 +35,7 @@ MetaWeather의 Open_API를 활용한 날씨검색 App
     implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.2.0'
 
     // Koin
     implementation 'org.koin:koin-android:2.0.1'
@@ -44,8 +45,8 @@ MetaWeather의 Open_API를 활용한 날씨검색 App
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     // Http
     implementation 'com.google.code.gson:gson:2.8.5'
