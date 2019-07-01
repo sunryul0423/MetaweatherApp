@@ -64,7 +64,7 @@ class LocationHolder(val binding: ViewWeatherItemBinding) : RecyclerView.ViewHol
 /**
  * 날씨정보 RecyclerView Adapter
  * @author SR.Park
- * @since 2019.02.26
+ * @since 2019.06.26
  * @property weatherItemVM 아이템  RecyclerView Item 리스트
  */
 class WeatherInfoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -7,7 +7,7 @@ import com.metaweather.interfaces.ApiRequest
 /**
  * MainViewModel Factory 객체
  * @author SR.Park
- * @since 2019.02.26
+ * @since 2019.06.26
  * @param apiRequest API 인터페이스
  */
 @Suppress("UNCHECKED_CAST")

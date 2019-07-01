@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
 /**
  * 공통적으로 필요한 변수,함수 정의한 ViewModel
  * @author SR.Park
- * @since 2019.02.26
+ * @since 2019.06.26
  * @property compositeDisposable Rx 구독 객체
  * @property networkError 네트워크 에러 메세지
  * @property showProgress 프로그래스 실행여부

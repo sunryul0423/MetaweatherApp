@@ -16,7 +16,7 @@ import org.koin.android.ext.android.inject
 /**
  * 메인화면(검색화면) View
  * @author SR.Park
- * @since 2019.02.26
+ * @since 2019.06.26
  * @property mainViewModelFactory viewModel Factory
  */
 class MainActivity : BaseActivity<ActivityMainBinding>() {
